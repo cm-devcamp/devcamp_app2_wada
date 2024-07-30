@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import products from '../../devcamp_products.json';
 
@@ -25,6 +26,17 @@ export default function Page() {
           <div className="flex" key={product.id}>
               <div className="grow p-6">
                 <Link href={`/products/${product.id}`}>{product.name}</Link>
+              </div>
+              <div className="grow p-6">
+                <p>{product.price}円</p>
+              </div>
+              <div className="p-6">
+              <Image className="p-2"
+                src={product.photo}
+                width={180}
+                height={180}
+                alt={product.name}
+              />
               </div>
               <div className="p-6">
                 {new Date(product.datems).toLocaleDateString("ja-JP")}
