@@ -1,6 +1,21 @@
+"use client";
+
 import Link from 'next/link'
+import React, { useState } from 'react'
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const router =useRouter();
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleClick = () => {
+    router.push(`/products?search=${searchTerm}`);
+  };
+
   return (
     <div className="z-10 w-full max-w-5xl items-center justify-between text-sm lg:flex">
       <nav className="flex w-full items-center justify-between flex-wrap p-6 bg-slate-100">
@@ -25,6 +40,10 @@ export default function Header() {
             <a href="/about" className="block mt-4 lg:inline-block lg:mt-0 hover:text-gray-400 mr-4">
               About us
             </a>
+          </div>
+          <div>
+            <input type="text" id="search-box" className="px-4 py-2 border rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400" placeholder="Search..." value={searchTerm} onChange={handleSearchChange} />
+              <button className="ml-2 px-4 py-2 border rounded bg-gray-700 text-white hover:bg-gray-600" onClick={handleClick}>Search</button>
           </div>
           <div>
             <a href="#" className="inline-block text-sm px-4 py-2 leading-none border rounded text-gray border-gray hover:border-transparent hover:text-gray-300 hover:bg-white mt-4 lg:mt-0">
